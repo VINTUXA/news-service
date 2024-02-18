@@ -5,14 +5,14 @@ import lombok.experimental.UtilityClass;
 
 import java.lang.reflect.Field;
 
-@UtilityClass
+@UtilityClass //все методы будут статиками
 public class BeanUtils {
-    @SneakyThrows
+    @SneakyThrows//обрабатывает все исключения
     public void copyNonNullProperties(Object source, Object destination){
         Class<?> clazz = source.getClass();
-        Field[] fieldz = clazz.getDeclaredFields();
+        Field[] fields = clazz.getDeclaredFields();
 
-        for(Field field: fieldz){
+        for(Field field: fields){
             field.setAccessible(true);
             Object value = field.get(source);
             if(value != null){
