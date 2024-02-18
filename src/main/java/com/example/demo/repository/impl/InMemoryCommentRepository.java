@@ -7,6 +7,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.utils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.text.MessageFormat;
 import java.time.Instant;
@@ -17,6 +18,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Component
 public class InMemoryCommentRepository implements CommentRepository {
     private UserRepository userRepository;
 

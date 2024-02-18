@@ -7,6 +7,7 @@ import com.example.demo.utils.BeanUtils;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.text.MessageFormat;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
-@Repository
+@Component
 public class InMemoryUserRepository implements UserRepository {
     private CommentRepository commentRepository;
     private final Map<Long, User> repository = new ConcurrentHashMap<>();
