@@ -17,16 +17,16 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class NewsMapper {
-    private final CategoryService categoryService;
+    private final CategoryService categoryServiceImpl;
     private final CommentMapper commentMapper;
 
-    private final UserService userService;
+    private final UserService userServiceImpl;
 
     public News requestToNews(UpsetNewsRequest request){
         News news = new News();
         news.setNewsText(request.getNewsText());
-        news.setCategory(categoryService.findById(request.getCategoryId()));
-        news.setCreator(userService.findById(request.getCreatorId()));
+        news.setCategory(categoryServiceImpl.findById(request.getCategoryId()));
+        news.setCreator(userServiceImpl.findById(request.getCreatorId()));
 
         return news;
     }

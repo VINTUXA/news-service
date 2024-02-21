@@ -1,7 +1,7 @@
-package com.example.demo.web.controller;
+package com.example.demo.web.controller.V2;
 
-import com.example.demo.aop.Security;
 import com.example.demo.mapper.V1.CommentMapper;
+import com.example.demo.mapper.V2.CommentMapperV2;
 import com.example.demo.model.Comment;
 import com.example.demo.service.CommentService;
 import com.example.demo.web.model.CommentListResponse;
@@ -13,26 +13,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/comment")
+@RequestMapping("api/v2/comment")
 @RequiredArgsConstructor
-public class CommentController {
-    private final CommentMapper commentMapper;
-    private final CommentService commentServiceImpl;
+public class CommentControllerV2 {
+    private final CommentMapperV2 commentMapper;
+    private final CommentService databaseCommentService;
 
     @GetMapping
     public ResponseEntity<CommentListResponse> findAll(){
-        return ResponseEntity.ok(commentMapper.commentListToOrderListResponse(commentServiceImpl.findAll()));
+        return ResponseEntity.ok(commentMapper.commentListToCommentListResponse(databaseCommentService.findAll()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CommentResponse> findById(@PathVariable Long id){
         return ResponseEntity.ok(
-                commentMapper.commentToResponse(commentServiceImpl.findById(id)));
+                commentMapper.commentToResponse(databaseCommentService.findById(id)));
     }
 
     @PostMapping
     public ResponseEntity<CommentResponse> save(@RequestBody UpsetCommentRequest upsetOrderRequest){
-        Comment newComment = commentServiceImpl.save(commentMapper.requestToComment(upsetOrderRequest));
+        Comment newComment = databaseCommentService.save(commentMapper.requestToComment(upsetOrderRequest));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(commentMapper.commentToResponse(newComment));
     }
@@ -41,15 +41,14 @@ public class CommentController {
     public ResponseEntity<CommentResponse> update(@PathVariable Long id,
                                                   @RequestParam("userId") Long userid,
                                                   @RequestBody UpsetCommentRequest request){
-        Comment updatedComment = commentServiceImpl.update(commentMapper.requestToComment(id, request));
+        Comment updatedComment = databaseCommentService.update(commentMapper.requestToComment(id, request));
         return ResponseEntity.ok(commentMapper.commentToResponse(updatedComment));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id,
                                        @RequestParam("userId") Long userid){
-        commentServiceImpl.deleteById(id);
-
+        databaseCommentService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

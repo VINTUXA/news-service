@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentMapper {
 
-    private final UserService userService;
-    private final NewsService newsService;
+    private final UserService userServiceImpl;
+    private final NewsService newsServiceImpl;
 
     public Comment requestToComment(UpsetCommentRequest request){
         Comment comment = new Comment();
         comment.setCommentText(request.getCommentText());
-        comment.setAuthor(userService.findById(request.getUserId()));
-        comment.setNews(newsService.findById(request.getNewsId()));
+        comment.setUser(userServiceImpl.findById(request.getUserId()));
+        comment.setNews(newsServiceImpl.findById(request.getNewsId()));
 
         return comment;
     }
@@ -39,7 +39,7 @@ public class CommentMapper {
 
         commentResponse.setId(comment.getId());
         commentResponse.setCommentText(comment.getCommentText());
-        commentResponse.setNewsId(newsService.findById(comment.getNews().getId()).getId());
+        commentResponse.setNewsId(newsServiceImpl.findById(comment.getNews().getId()).getId());
 
         return commentResponse;
     }

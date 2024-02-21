@@ -4,6 +4,8 @@ import com.example.demo.model.Comment;
 import com.example.demo.model.News;
 import com.example.demo.service.CommentService;
 import com.example.demo.service.NewsService;
+import com.example.demo.service.impl.DatabaseCommentService;
+import com.example.demo.service.impl.DatabaseNewsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.*;
@@ -21,11 +23,11 @@ import java.util.Map;
 @Slf4j
 public class SecurityAspect {
 
-    private final NewsService newsService;
-    private final CommentService commentService;
+    private final DatabaseNewsService newsService;
+    private final DatabaseCommentService commentService;
 
     @Autowired
-    public SecurityAspect(NewsService newsService, CommentService commentService) {
+    public SecurityAspect(DatabaseNewsService newsService, DatabaseCommentService commentService) {
         this.newsService = newsService;
         this.commentService = commentService;
     }
@@ -69,7 +71,7 @@ public class SecurityAspect {
         Long userIdFromRequest = Long.valueOf(userIdParam);
         System.out.println("user id is: " + userIdFromRequest);
 
-        long creatorId = commentService.findById(comment.getId()).getAuthor().getId();
+        long creatorId = commentService.findById(comment.getId()).getUser().getId();
         if (creatorId != userIdFromRequest){
             throw new SecurityException("You are not authorized to edit or delete this comment.");
         }

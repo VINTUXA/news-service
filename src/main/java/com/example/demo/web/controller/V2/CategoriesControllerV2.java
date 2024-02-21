@@ -1,55 +1,54 @@
-package com.example.demo.web.controller;
+package com.example.demo.web.controller.V2;
 
 import com.example.demo.mapper.V1.CategoryMapper;
-import com.example.demo.mapper.V1.NewsMapper;
+import com.example.demo.mapper.V2.CategoryMapperV2;
 import com.example.demo.model.Category;
-import com.example.demo.model.News;
 import com.example.demo.service.CategoryService;
-import com.example.demo.service.NewsService;
-import com.example.demo.web.model.*;
+import com.example.demo.web.model.CategoryListResponse;
+import com.example.demo.web.model.CategoryResponse;
+import com.example.demo.web.model.UpsetCategoryRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/category")
+@RequestMapping("api/v2/category")
 @RequiredArgsConstructor
-public class CategoryController {
+public class CategoriesControllerV2 {
 
-    private final CategoryMapper categoryMapper;
-    private final CategoryService categoryServiceImpl;
+    private final CategoryMapperV2 categoryMapper;
+    private final CategoryService databaseCategoryService;
 
     @GetMapping
     public ResponseEntity<CategoryListResponse> findAll(){
-        return ResponseEntity.ok(categoryMapper.categoryListToNewsListResponse(categoryServiceImpl.findAll()));
+        return ResponseEntity.ok(categoryMapper.categoryListToNewsListResponse(databaseCategoryService.findAll()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryResponse> findById(@PathVariable Long id){
         return ResponseEntity.ok(
-                categoryMapper.categoryToResponse(categoryServiceImpl.findById(id)));
+                categoryMapper.categoryToResponse(databaseCategoryService.findById(id)));
     }
 
     @PostMapping
     public ResponseEntity<CategoryResponse> save(@RequestBody UpsetCategoryRequest upsetCategoryRequest){
-        Category newCategory = categoryServiceImpl.save(categoryMapper.requestToCategory(upsetCategoryRequest));
+        Category newCategory = databaseCategoryService.save(categoryMapper.requestToCategory(upsetCategoryRequest));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryMapper.categoryToResponse(newCategory));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoryResponse> update(@PathVariable Long id,
-                                               @RequestBody UpsetCategoryRequest request){
-        Category updatedCategory = categoryServiceImpl.update(categoryMapper.requestToCategory(id, request));
+                                                   @RequestBody UpsetCategoryRequest request){
+        Category updatedCategory = databaseCategoryService.update(categoryMapper.requestToCategory(id, request));
         return ResponseEntity.ok(categoryMapper.categoryToResponse(updatedCategory));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        categoryServiceImpl.deleteById(id);
+        databaseCategoryService.deleteById(id);
 
         return ResponseEntity.noContent().build();
     }
-
 }

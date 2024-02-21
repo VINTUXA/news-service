@@ -41,10 +41,10 @@ public class InMemoryCommentRepository implements CommentRepository {
     @Override
     public Comment save(Comment comment) {
         Long commentId = currentId.getAndIncrement();
-        Long clientId = comment.getAuthor().getId();
+        Long clientId = comment.getUser().getId();
         User user = userRepository.findById(clientId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        comment.setAuthor(user);
+        comment.setUser(user);
         comment.setId(commentId);
         Instant now = Instant.now();
         comment.setCreateAt(now);

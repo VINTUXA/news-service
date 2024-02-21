@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class CategoryMapper {
-    private final CategoryService categoryService;
-    private final NewsService newsService;
+    private final CategoryService categoryServiceImpl;
+    private final NewsService newsServiceImpl;
     private final NewsMapper newsMapper;
 
     public Category requestToCategory(UpsetCategoryRequest request){

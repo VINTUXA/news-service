@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
+    private final UserService userServiceImpl;
     private final UserMapper userMapper;
 
 
     @GetMapping
     public ResponseEntity<UserListResponse> findAll(){
         return ResponseEntity.ok(
-                userMapper.userListToUserListResponse(userService.findAll())
+                userMapper.userListToUserListResponse(userServiceImpl.findAll())
         );
     }
 
@@ -30,13 +30,13 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> findById(@PathVariable Long id){
         return ResponseEntity.ok(
-                userMapper.userToResponse(userService.findById(id))
+                userMapper.userToResponse(userServiceImpl.findById(id))
         );
     }
 
     @PostMapping
     public ResponseEntity<UserResponse> create(@RequestBody UpsetUserRequest upsetUserRequest){
-        User newUser = userService.save(userMapper.requestToUser(upsetUserRequest));
+        User newUser = userServiceImpl.save(userMapper.requestToUser(upsetUserRequest));
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userMapper.userToResponse(newUser));
     }
@@ -44,13 +44,13 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id,
                                                  @RequestBody UpsetUserRequest request){
-        User updatedUser  = userService.update(userMapper.requestToUser(id, request));
+        User updatedUser  = userServiceImpl.update(userMapper.requestToUser(id, request));
         return ResponseEntity.ok(userMapper.userToResponse(updatedUser));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        userService.deleteById(id);
+        userServiceImpl.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
