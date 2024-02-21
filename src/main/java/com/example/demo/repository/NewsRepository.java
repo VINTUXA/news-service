@@ -17,4 +17,5 @@ public interface NewsRepository {
 
     void deleteById(Long id);
     void deleteByIdIn(List<Long> ids);
+
 }

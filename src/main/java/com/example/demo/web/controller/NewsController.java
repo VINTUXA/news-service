@@ -39,13 +39,16 @@ public class NewsController {
 
     @PutMapping("/{id}")
     public ResponseEntity<NewsResponse> update(@PathVariable Long id,
-                                                  @RequestBody UpsetNewsRequest request){
+                                                  @RequestBody UpsetNewsRequest request,
+                                               @RequestParam("userId") Long userid){
         News updatedNews = newsService.update(newsMapper.requestToNews(id, request));
+        System.out.println(userid);
         return ResponseEntity.ok(newsMapper.newsToResponse(updatedNews));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id,
+                                       @RequestParam("userId") Long userId){
         newsService.deleteById(id);
 
         return ResponseEntity.noContent().build();

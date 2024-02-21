@@ -28,6 +28,7 @@ dependencies {
 //	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.aspectj:aspectjweaver:1.9.7")
 }
 
 tasks.withType<Test> {

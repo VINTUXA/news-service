@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.aop.Security;
 import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.model.News;
 import com.example.demo.repository.NewsRepository;
@@ -32,11 +33,13 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    @Security
     public News update(News news) {
         return newsRepository.update(news);
     }
 
     @Override
+    @Security
     public void deleteById(Long id) {
         newsRepository.deleteById(id);
     }
@@ -44,5 +47,10 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void deleteByIdIn(List<Long> ids) {
         newsRepository.deleteByIdIn(ids);
+    }
+
+    @Override
+    public Long getCreatorIdByNews(News news) {
+        return news.getCreator().getId();
     }
 }

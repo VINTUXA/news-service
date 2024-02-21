@@ -1,5 +1,6 @@
 package com.example.demo.web.controller;
 
+import com.example.demo.aop.Security;
 import com.example.demo.mapper.V1.CommentMapper;
 import com.example.demo.model.Comment;
 import com.example.demo.service.CommentService;
@@ -38,13 +39,15 @@ public class CommentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<CommentResponse> update(@PathVariable Long id,
-                                                @RequestBody UpsetCommentRequest request){
+                                                  @RequestParam("userId") Long userid,
+                                                  @RequestBody UpsetCommentRequest request){
         Comment updatedComment = commentService.update(commentMapper.requestToComment(id, request));
         return ResponseEntity.ok(commentMapper.commentToResponse(updatedComment));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id,
+                                       @RequestParam("userId") Long userid){
         commentService.deleteById(id);
 
         return ResponseEntity.noContent().build();

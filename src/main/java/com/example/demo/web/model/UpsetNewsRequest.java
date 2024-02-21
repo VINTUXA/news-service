@@ -6,4 +6,6 @@ import lombok.Data;
 public class UpsetNewsRequest {
     private Long categoryId;
     private String newsText;
+    private String title;
+    private Long creatorId;
 }

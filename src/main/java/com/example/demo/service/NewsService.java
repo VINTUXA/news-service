@@ -18,4 +18,5 @@ public interface NewsService {
     void deleteById(Long id);
 
     void deleteByIdIn(List<Long> ids);
+    Long getCreatorIdByNews(News news);
 }

@@ -20,10 +20,13 @@ public class NewsMapper {
     private final CategoryService categoryService;
     private final CommentMapper commentMapper;
 
+    private final UserService userService;
+
     public News requestToNews(UpsetNewsRequest request){
         News news = new News();
         news.setNewsText(request.getNewsText());
         news.setCategory(categoryService.findById(request.getCategoryId()));
+        news.setCreator(userService.findById(request.getCreatorId()));
 
         return news;
     }

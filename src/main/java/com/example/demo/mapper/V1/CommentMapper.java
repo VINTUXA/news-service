@@ -22,7 +22,7 @@ public class CommentMapper {
     public Comment requestToComment(UpsetCommentRequest request){
         Comment comment = new Comment();
         comment.setCommentText(request.getCommentText());
-        comment.setAuthor(userService.findById(request.getUserid()));
+        comment.setAuthor(userService.findById(request.getUserId()));
         comment.setNews(newsService.findById(request.getNewsId()));
 
         return comment;

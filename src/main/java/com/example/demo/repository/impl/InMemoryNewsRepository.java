@@ -88,4 +88,7 @@ public class InMemoryNewsRepository implements NewsRepository {
     public void deleteByIdIn(List<Long> ids) {
         ids.forEach(repository::remove);
     }
+
+
+
 }

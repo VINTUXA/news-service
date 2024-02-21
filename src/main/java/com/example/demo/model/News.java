@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 @Data
 public class News {
     private Long id;
+    private User creator;
     private String title;
     private String newsText;
     private List<Comment> comments = new ArrayList<>();

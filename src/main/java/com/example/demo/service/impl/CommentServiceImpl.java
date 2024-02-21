@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.aop.Security;
 import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.model.Comment;
 import com.example.demo.repository.CommentRepository;
@@ -32,11 +33,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Security
     public Comment update(Comment comment) {
         return commentRepository.update(comment);
     }
 
     @Override
+    @Security
     public void deleteById(Long id) {
         commentRepository.deleteById(id);
     }

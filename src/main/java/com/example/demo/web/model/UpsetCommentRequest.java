@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UpsetCommentRequest {
-    private Long userid;
+    private Long userId;
     private String commentText;
     private Long newsId;
 
