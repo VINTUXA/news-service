@@ -17,7 +17,7 @@ public class UserMapper {
 
     public User requestToUser(UpsetUserRequest request){
         User user = new User();
-        user.setName(request.getName());
+        user.setUserName(request.getUserName());
 
         return user;
     }
@@ -31,7 +31,7 @@ public class UserMapper {
     public UserResponse userToResponse(User user){
         UserResponse userResponse = new UserResponse();
         userResponse.setId(user.getId());
-        userResponse.setName(user.getName());
+        userResponse.setUserName(user.getUserName());
         userResponse.setComments(commentMapper.commentListToResponseList(user.getComments()));
 
         return userResponse;

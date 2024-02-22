@@ -4,6 +4,7 @@ import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
+import com.example.demo.web.model.UserFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public List<User> findAll() {
+    public List<User> filterBy(UserFilter filter) {
+        throw new RuntimeException("not implemented");
+    }
+
+    @Override
+    public List<User> findAll(UserFilter filter) {
         return userRepository.findAll();
     }
 

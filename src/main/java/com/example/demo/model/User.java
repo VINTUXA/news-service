@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "user_name")
-    private String name;
+    private String userName;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)// маппед указывает на обратное отображение к отношение многие к одномк
     @ToString.Exclude // каскад указывает какие оперции по сохра обновлению и тд должны быть применены к связанной сущности
     @Builder.Default

@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 public class UserResponse {
     private Long id;
-    private String name;
+    private String userName;
     private List<CommentResponse> comments = new ArrayList<>();
 }

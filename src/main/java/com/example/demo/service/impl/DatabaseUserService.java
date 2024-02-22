@@ -6,7 +6,9 @@ import com.example.demo.model.User;
 import com.example.demo.repository.DatabaseUserRepository;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.BeanUtils;
+import com.example.demo.web.model.UserFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -18,8 +20,18 @@ public class DatabaseUserService implements UserService {
     private final DatabaseUserRepository userRepository;
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<User> filterBy(UserFilter filter) {
+        return userRepository.findAllByUserName(filter.getUserName(), PageRequest.of(
+                filter.getPageNumber(), filter.getPageSize()
+        )).getContent();
+    }
+
+    @Override
+    public List<User> findAll(UserFilter filter) {
+//        return userRepository.findAll();
+        return userRepository.findAll(PageRequest.of(
+                filter.getPageNumber(), filter.getPageSize()
+        )).getContent();
     }
 
     @Override
@@ -30,6 +42,7 @@ public class DatabaseUserService implements UserService {
 
     @Override
     public User save(User user) {
+        System.out.println(user.getUserName());
         return userRepository.save(user);
     }
 

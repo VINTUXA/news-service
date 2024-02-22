@@ -4,6 +4,7 @@ import com.example.demo.mapper.V2.UserMapperV2;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.web.model.UpsetUserRequest;
+import com.example.demo.web.model.UserFilter;
 import com.example.demo.web.model.UserListResponse;
 import com.example.demo.web.model.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +22,17 @@ public class UserControllerV2 {
     private final UserService databaseUserService;
     private final UserMapperV2 userMapper;
 
-    @GetMapping
-    public ResponseEntity<UserListResponse> findAll() {
+    @GetMapping("/filter")
+    public ResponseEntity<UserListResponse> filterBy(UserFilter filter) {
         return ResponseEntity.ok(
-                userMapper.userListToUserListResponse(databaseUserService.findAll())
+                userMapper.userListToUserListResponse(databaseUserService.filterBy(filter))
+        );
+    }
+
+    @GetMapping
+    public ResponseEntity<UserListResponse> findAll(UserFilter filter) {
+        return ResponseEntity.ok(
+                userMapper.userListToUserListResponse(databaseUserService.findAll(filter))
         );
     }
 
