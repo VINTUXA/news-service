@@ -16,13 +16,18 @@ import java.util.List;
 public interface CommentMapperV2 {
     Comment requestToComment(UpsetCommentRequest request);
 
-    @Mapping(source = "commentId", target = "id") // указание мапиинга между свойствами
     Comment requestToComment(Long commentId, UpsetCommentRequest request);
 
+    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "news.id", target = "newsId")
     CommentResponse commentToResponse(Comment comment);
 
+    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "news.id", target = "newsId")
     List<CommentResponse> commentListToResponseList(List<Comment> orders);
 
+    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "news.id", target = "newsId")
     default CommentListResponse commentListToCommentListResponse(List<Comment> comments){
         CommentListResponse response = new CommentListResponse();
         response.setComments(commentListToResponseList(comments));

@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.aop.Security;
 import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.model.Comment;
+import com.example.demo.model.News;
 import com.example.demo.model.User;
 import com.example.demo.repository.DatabaseCommentRepository;
 import com.example.demo.service.CommentService;
@@ -19,6 +20,7 @@ public class DatabaseCommentService implements CommentService {
 
     private final DatabaseCommentRepository commentRepository;
     private final DatabaseUserService userService;
+    private final DatabaseNewsService newsService;
 
     @Override
     public List<Comment> findAll() {
@@ -33,6 +35,10 @@ public class DatabaseCommentService implements CommentService {
 
     @Override
     public Comment save(Comment comment) {
+//        User user = userService.findById(comment.getUser().getId());
+//        comment.setUser(user);
+//        News news = newsService.findById(comment.getNews().getId());
+//        comment.setNews(news);
         return commentRepository.save(comment);
     }
 

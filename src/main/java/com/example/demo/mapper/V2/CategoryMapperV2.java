@@ -1,6 +1,5 @@
 package com.example.demo.mapper.V2;
 
-import com.example.demo.mapper.V1.NewsMapper;
 import com.example.demo.model.Category;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.NewsService;

@@ -1,6 +1,5 @@
 package com.example.demo.web.controller.V2;
 
-import com.example.demo.mapper.V1.CommentMapper;
 import com.example.demo.mapper.V2.CommentMapperV2;
 import com.example.demo.model.Comment;
 import com.example.demo.service.CommentService;

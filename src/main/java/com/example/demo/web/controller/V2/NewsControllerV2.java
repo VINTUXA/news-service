@@ -1,6 +1,5 @@
 package com.example.demo.web.controller.V2;
 
-import com.example.demo.mapper.V1.NewsMapper;
 import com.example.demo.mapper.V2.NewsMapperV2;
 import com.example.demo.model.News;
 import com.example.demo.service.NewsService;

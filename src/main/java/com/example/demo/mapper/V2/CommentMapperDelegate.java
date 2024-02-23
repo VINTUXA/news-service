@@ -22,7 +22,6 @@ public abstract class CommentMapperDelegate implements CommentMapperV2{
         comment.setCommentText(request.getCommentText());
         comment.setUser(databaseUserService.findById(request.getUserId()));
         comment.setNews(databaseNewsService.findById(request.getNewsId()));
-
         return comment;
     }
 

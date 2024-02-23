@@ -2,9 +2,6 @@ package com.example.demo.service.impl;
 
 import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.model.Category;
-import com.example.demo.model.Comment;
-import com.example.demo.model.User;
-import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.DatabaseCategoryRepository;
 import com.example.demo.service.CategoryService;
 import com.example.demo.utils.BeanUtils;

@@ -10,5 +10,6 @@ public class CommentResponse {
     private Long id;
     private String commentText;
     private Long newsId;
+    private Long userId;
 
 }

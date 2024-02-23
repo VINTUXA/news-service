@@ -1,6 +1,5 @@
 package com.example.demo.web.controller.V2;
 
-import com.example.demo.mapper.V1.CategoryMapper;
 import com.example.demo.mapper.V2.CategoryMapperV2;
 import com.example.demo.model.Category;
 import com.example.demo.service.CategoryService;
