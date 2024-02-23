@@ -3,6 +3,7 @@ package com.example.demo.web.controller.V2;
 import com.example.demo.mapper.V2.CommentMapperV2;
 import com.example.demo.model.Comment;
 import com.example.demo.service.CommentService;
+import com.example.demo.web.model.CommentFilter;
 import com.example.demo.web.model.CommentListResponse;
 import com.example.demo.web.model.CommentResponse;
 import com.example.demo.web.model.UpsetCommentRequest;
@@ -19,8 +20,8 @@ public class CommentControllerV2 {
     private final CommentService databaseCommentService;
 
     @GetMapping
-    public ResponseEntity<CommentListResponse> findAll(){
-        return ResponseEntity.ok(commentMapper.commentListToCommentListResponse(databaseCommentService.findAll()));
+    public ResponseEntity<CommentListResponse> findAll(CommentFilter filter){
+        return ResponseEntity.ok(commentMapper.commentListToCommentListResponse(databaseCommentService.filterBy(filter)));
     }
 
     @GetMapping("/{id}")

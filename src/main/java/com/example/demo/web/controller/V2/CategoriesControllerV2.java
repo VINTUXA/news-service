@@ -3,9 +3,7 @@ package com.example.demo.web.controller.V2;
 import com.example.demo.mapper.V2.CategoryMapperV2;
 import com.example.demo.model.Category;
 import com.example.demo.service.CategoryService;
-import com.example.demo.web.model.CategoryListResponse;
-import com.example.demo.web.model.CategoryResponse;
-import com.example.demo.web.model.UpsetCategoryRequest;
+import com.example.demo.web.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +18,8 @@ public class CategoriesControllerV2 {
     private final CategoryService databaseCategoryService;
 
     @GetMapping
-    public ResponseEntity<CategoryListResponse> findAll(){
-        return ResponseEntity.ok(categoryMapper.categoryListToNewsListResponse(databaseCategoryService.findAll()));
+    public ResponseEntity<CategoryListResponse> findAll(CategoryFilter filter){
+        return ResponseEntity.ok(categoryMapper.categoryListToNewsListResponse(databaseCategoryService.findAll(filter)));
     }
 
     @GetMapping("/{id}")

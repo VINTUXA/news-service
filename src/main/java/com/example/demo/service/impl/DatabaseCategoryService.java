@@ -5,7 +5,9 @@ import com.example.demo.model.Category;
 import com.example.demo.repository.DatabaseCategoryRepository;
 import com.example.demo.service.CategoryService;
 import com.example.demo.utils.BeanUtils;
+import com.example.demo.web.model.CategoryFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -17,8 +19,10 @@ public class DatabaseCategoryService implements CategoryService {
     private final DatabaseCategoryRepository categoryRepository;
 
     @Override
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+    public List<Category> findAll(CategoryFilter filter) {
+        return categoryRepository.findAll(PageRequest.of(
+                filter.getPageNumber(), filter.getPageSize()
+        )).getContent();
     }
 
     @Override

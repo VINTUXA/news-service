@@ -8,7 +8,9 @@ import com.example.demo.model.User;
 import com.example.demo.repository.DatabaseCommentRepository;
 import com.example.demo.service.CommentService;
 import com.example.demo.utils.BeanUtils;
+import com.example.demo.web.model.CommentFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -23,7 +25,17 @@ public class DatabaseCommentService implements CommentService {
     private final DatabaseNewsService newsService;
 
     @Override
-    public List<Comment> findAll() {
+    public List<Comment> filterBy(CommentFilter filter) {
+        if(filter.getNewsId() == null){
+            throw new RuntimeException("suka");
+        }
+        return commentRepository.findAllByNewsId(filter.getNewsId(), PageRequest.of(
+                filter.getPageNumber(), filter.getPageSize()
+        )).getContent();
+    }
+
+    @Override
+    public List<Comment> findAll(CommentFilter filter) {
         return commentRepository.findAll();
     }
 

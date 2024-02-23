@@ -15,4 +15,10 @@ public class ExceptionHandlerController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(new ErrorResponse(ex.getLocalizedMessage()));
     }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> securityBadResponse(RuntimeException ex){
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new ErrorResponse(ex.getLocalizedMessage()));
+    }
 }

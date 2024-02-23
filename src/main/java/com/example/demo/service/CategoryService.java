@@ -2,12 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.model.Category;
 import com.example.demo.model.News;
+import com.example.demo.web.model.CategoryFilter;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    List<Category> findAll();
+    List<Category> findAll(CategoryFilter filter);
 
     Category findById(Long id);
 

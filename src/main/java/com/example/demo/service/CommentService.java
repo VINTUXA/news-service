@@ -1,13 +1,14 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Comment;
+import com.example.demo.web.model.CommentFilter;
 
 import java.util.List;
 
 public interface CommentService {
-//    List<Comment> filterBy(OrderFilter orderFilter);
+    List<Comment> filterBy(CommentFilter filter);
 
-    List<Comment> findAll();
+    List<Comment> findAll(CommentFilter filter);
 
     Comment findById(Long id);
 
