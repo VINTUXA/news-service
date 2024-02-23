@@ -14,6 +14,9 @@ public class NewsResponse {
     private Long authorId;
 
     private Long categoryId;
+    private String title;
 
-    private List<CommentResponse> comments = new ArrayList<>();;
+    private Integer commentCount;
+
+//    private List<CommentResponse> comments = new ArrayList<>();;
 }
