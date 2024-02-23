@@ -19,9 +19,13 @@ public class NewsController {
     private final NewsMapper newsMapper;
     private final NewsService newsServiceImpl;
 
+//    @GetMapping
+//    public ResponseEntity<NewsListResponse> findAll(){
+//        return ResponseEntity.ok(newsMapper.newsListToNewsListResponse(newsServiceImpl.findAll()));
+//    }
     @GetMapping
-    public ResponseEntity<NewsListResponse> findAll(){
-        return ResponseEntity.ok(newsMapper.newsListToNewsListResponse(newsServiceImpl.findAll()));
+    public ResponseEntity<NewsListResponse> findAll(NewsFilter filter){
+        return ResponseEntity.ok(newsMapper.newsListToNewsListResponse(newsServiceImpl.findAll(filter)));
     }
 
     @GetMapping("/{id}")

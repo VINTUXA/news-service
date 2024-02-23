@@ -19,12 +19,12 @@ public class UserController {
     private final UserMapper userMapper;
 
 
-    @GetMapping
-    public ResponseEntity<UserListResponse> findAll(){
-        return ResponseEntity.ok(
-                userMapper.userListToUserListResponse(userServiceImpl.findAll())
-        );
-    }
+//    @GetMapping
+//    public ResponseEntity<UserListResponse> findAll(){
+//        return ResponseEntity.ok(
+//                userMapper.userListToUserListResponse(userServiceImpl.findAll())
+//        );
+//    }
 
 
     @GetMapping("/{id}")

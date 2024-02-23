@@ -6,9 +6,12 @@ import com.example.demo.model.News;
 import com.example.demo.model.User;
 import com.example.demo.repository.DatabaseNewsRepository;
 import com.example.demo.repository.NewsRepository;
+import com.example.demo.repository.NewsSpecification;
 import com.example.demo.service.NewsService;
 import com.example.demo.utils.BeanUtils;
+import com.example.demo.web.model.NewsFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -20,8 +23,23 @@ public class DatabaseNewsService implements NewsService {
     private final DatabaseNewsRepository newsRepository;
 
     @Override
-    public List<News> findAll() {
-        return newsRepository.findAll();
+    public List<News> filterBy(NewsFilter filter) {
+        return newsRepository.findAll(NewsSpecification.withFilter(filter),
+                PageRequest.of(
+                        filter.getPageNumber(), filter.getPageSize()
+                )).getContent();
+    }
+
+//    @Override
+//    public List<News> findAll() {
+//        return newsRepository.findAll();
+//    }
+    @Override
+    public List<News> findAll(NewsFilter filter) {
+        return newsRepository.findAll(NewsSpecification.withFilter(filter),
+                PageRequest.of(
+                        filter.getPageNumber(), filter.getPageSize()
+                )).getContent();
     }
 
     @Override

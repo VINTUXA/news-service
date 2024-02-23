@@ -5,6 +5,7 @@ import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.model.News;
 import com.example.demo.repository.NewsRepository;
 import com.example.demo.service.NewsService;
+import com.example.demo.web.model.NewsFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,19 @@ public class NewsServiceImpl implements NewsService {
     private final NewsRepository newsRepository;
 
     @Override
-    public List<News> findAll() {
-        return newsRepository.findAll();
+    public List<News> filterBy(NewsFilter newsFilter) {
+        throw new RuntimeException("not implemented");
     }
+
+    @Override
+    public List<News> findAll(NewsFilter newsFilter) {
+        throw new RuntimeException("not implemented");
+    }
+
+//    @Override
+//    public List<News> findAll() {
+//        return newsRepository.findAll();
+//    }
 
     @Override
     public News findById(Long id) {

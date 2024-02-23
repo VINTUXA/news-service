@@ -8,6 +8,7 @@ import com.example.demo.web.model.NewsListResponse;
 import com.example.demo.web.model.NewsResponse;
 import com.example.demo.web.model.UpsetNewsRequest;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public interface NewsMapperV2 {
 
     public News requestToNews(Long newsId, UpsetNewsRequest request);
 
+    @Mapping(target = "authorId", source = "creator.id")
     public NewsResponse newsToResponse(News news);
 
     default List<NewsResponse> newsListToResponseList(List<News> newsList){

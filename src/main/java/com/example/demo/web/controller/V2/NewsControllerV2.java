@@ -4,9 +4,7 @@ import com.example.demo.mapper.V1.NewsMapper;
 import com.example.demo.mapper.V2.NewsMapperV2;
 import com.example.demo.model.News;
 import com.example.demo.service.NewsService;
-import com.example.demo.web.model.NewsListResponse;
-import com.example.demo.web.model.NewsResponse;
-import com.example.demo.web.model.UpsetNewsRequest;
+import com.example.demo.web.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +18,8 @@ public class NewsControllerV2 {
     private final NewsService databaseNewsService;
 
     @GetMapping
-    public ResponseEntity<NewsListResponse> findAll(){
-        return ResponseEntity.ok(newsMapper.newsListToNewsListResponse(databaseNewsService.findAll()));
+    public ResponseEntity<NewsListResponse> findAll(NewsFilter filter){
+        return ResponseEntity.ok(newsMapper.newsListToNewsListResponse(databaseNewsService.findAll(filter)));
     }
 
     @GetMapping("/{id}")
