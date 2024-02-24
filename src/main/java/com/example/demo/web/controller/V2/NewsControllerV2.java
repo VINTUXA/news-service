@@ -22,9 +22,9 @@ public class NewsControllerV2 {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NewsResponse> findById(@PathVariable Long id){
+    public ResponseEntity<NewsResponseForOneNews> findById(@PathVariable Long id){
         return ResponseEntity.ok(
-                newsMapper.newsToResponse(databaseNewsService.findById(id)));
+                newsMapper.oneNewsToResponse(databaseNewsService.findById(id)));
     }
 
     @PostMapping

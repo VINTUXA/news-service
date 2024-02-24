@@ -27,7 +27,7 @@ public class DatabaseCommentService implements CommentService {
     @Override
     public List<Comment> filterBy(CommentFilter filter) {
         if(filter.getNewsId() == null){
-            throw new RuntimeException("suka");
+            throw new RuntimeException("User id should be declared in request params!");
         }
         return commentRepository.findAllByNewsId(filter.getNewsId(), PageRequest.of(
                 filter.getPageNumber(), filter.getPageSize()
@@ -47,10 +47,6 @@ public class DatabaseCommentService implements CommentService {
 
     @Override
     public Comment save(Comment comment) {
-//        User user = userService.findById(comment.getUser().getId());
-//        comment.setUser(user);
-//        News news = newsService.findById(comment.getNews().getId());
-//        comment.setNews(news);
         return commentRepository.save(comment);
     }
 
