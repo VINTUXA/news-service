@@ -4,6 +4,7 @@ import com.example.demo.mapper.V2.CategoryMapperV2;
 import com.example.demo.model.Category;
 import com.example.demo.service.CategoryService;
 import com.example.demo.web.model.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class CategoriesControllerV2 {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> save(@RequestBody UpsetCategoryRequest upsetCategoryRequest){
+    public ResponseEntity<CategoryResponse> save(@Valid @RequestBody UpsetCategoryRequest upsetCategoryRequest){
         Category newCategory = databaseCategoryService.save(categoryMapper.requestToCategory(upsetCategoryRequest));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryMapper.categoryToResponse(newCategory));
@@ -37,7 +38,7 @@ public class CategoriesControllerV2 {
 
     @PutMapping("/{id}")
     public ResponseEntity<CategoryResponse> update(@PathVariable Long id,
-                                                   @RequestBody UpsetCategoryRequest request){
+                                                   @Valid @RequestBody UpsetCategoryRequest request){
         Category updatedCategory = databaseCategoryService.update(categoryMapper.requestToCategory(id, request));
         return ResponseEntity.ok(categoryMapper.categoryToResponse(updatedCategory));
     }

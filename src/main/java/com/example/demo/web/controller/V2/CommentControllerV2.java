@@ -7,6 +7,7 @@ import com.example.demo.web.model.CommentFilter;
 import com.example.demo.web.model.CommentListResponse;
 import com.example.demo.web.model.CommentResponse;
 import com.example.demo.web.model.UpsetCommentRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class CommentControllerV2 {
     }
 
     @PostMapping
-    public ResponseEntity<CommentResponse> save(@RequestBody UpsetCommentRequest upsetOrderRequest){
+    public ResponseEntity<CommentResponse> save(@Valid @RequestBody UpsetCommentRequest upsetOrderRequest){
         Comment newComment = databaseCommentService.save(commentMapper.requestToComment(upsetOrderRequest));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(commentMapper.commentToResponse(newComment));
@@ -40,7 +41,7 @@ public class CommentControllerV2 {
     @PutMapping("/{id}")
     public ResponseEntity<CommentResponse> update(@PathVariable Long id,
                                                   @RequestParam("userId") Long userid,
-                                                  @RequestBody UpsetCommentRequest request){
+                                                  @Valid @RequestBody UpsetCommentRequest request){
         Comment updatedComment = databaseCommentService.update(commentMapper.requestToComment(id, request));
         return ResponseEntity.ok(commentMapper.commentToResponse(updatedComment));
     }

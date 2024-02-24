@@ -7,6 +7,7 @@ import com.example.demo.web.model.UpsetUserRequest;
 import com.example.demo.web.model.UserFilter;
 import com.example.demo.web.model.UserListResponse;
 import com.example.demo.web.model.UserResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class UserControllerV2 {
     private final UserMapperV2 userMapper;
 
     @GetMapping("/filter")
-    public ResponseEntity<UserListResponse> filterBy(UserFilter filter) {
+    public ResponseEntity<UserListResponse> filterBy(@Valid UserFilter filter) {
         return ResponseEntity.ok(
                 userMapper.userListToUserListResponse(databaseUserService.filterBy(filter))
         );
@@ -37,14 +38,14 @@ public class UserControllerV2 {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> findById(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> findById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(
                 userMapper.userToResponse(databaseUserService.findById(id))
         );
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody UpsetUserRequest upsetUserRequest) {
+    public ResponseEntity<UserResponse> create(@Valid @RequestBody UpsetUserRequest upsetUserRequest) {
         User newUser= databaseUserService.save(userMapper.requestToUser(upsetUserRequest));
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userMapper.userToResponse(newUser));
@@ -52,7 +53,7 @@ public class UserControllerV2 {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id,
-                                                 @RequestBody UpsetUserRequest request) {
+                                               @Valid @RequestBody UpsetUserRequest request) {
         User updatedUser = databaseUserService.update(userMapper.requestToUser(id, request));
         return ResponseEntity.ok(userMapper.userToResponse(updatedUser));
     }

@@ -4,6 +4,7 @@ import com.example.demo.mapper.V2.NewsMapperV2;
 import com.example.demo.model.News;
 import com.example.demo.service.NewsService;
 import com.example.demo.web.model.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class NewsControllerV2 {
     }
 
     @PostMapping
-    public ResponseEntity<NewsResponse> save(@RequestBody UpsetNewsRequest upsetNewsRequest){
+    public ResponseEntity<NewsResponse> save(@Valid @RequestBody UpsetNewsRequest upsetNewsRequest){
         News newNews = databaseNewsService.save(newsMapper.requestToNews(upsetNewsRequest));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newsMapper.newsToResponse(newNews));
@@ -36,7 +37,7 @@ public class NewsControllerV2 {
 
     @PutMapping("/{id}")
     public ResponseEntity<NewsResponse> update(@PathVariable Long id,
-                                               @RequestBody UpsetNewsRequest request,
+                                               @Valid @RequestBody UpsetNewsRequest request,
                                                @RequestParam("userId") Long userid){
         News updatedNews = databaseNewsService.update(newsMapper.requestToNews(id, request));
         System.out.println(userid);
