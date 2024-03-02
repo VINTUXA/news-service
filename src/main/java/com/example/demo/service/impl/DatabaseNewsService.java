@@ -13,6 +13,8 @@ import com.example.demo.service.CategoryService;
 import com.example.demo.service.NewsService;
 import com.example.demo.utils.BeanUtils;
 import com.example.demo.web.model.NewsFilter;
+import com.example.demo.web.model.NewsResponse;
+import com.example.demo.web.model.NewsResponseForOneNews;
 import com.example.demo.web.model.UpsetNewsRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +57,13 @@ public class DatabaseNewsService implements NewsService {
         return newsRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(MessageFormat.format("News with id {0} not found", id)));
     }
+    @Override
+    public NewsResponseForOneNews findByIdForOneNews(Long id) {
+        News news = newsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(MessageFormat.format("News with id {0} not found", id)));
+        return newsMapper.oneNewsToResponse(news);
+    }
+//
 
 //    @Override
 //    public News save(News news) {
