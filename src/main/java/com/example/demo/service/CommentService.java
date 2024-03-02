@@ -6,7 +6,7 @@ import com.example.demo.web.model.CommentFilter;
 import java.util.List;
 
 public interface CommentService {
-    List<Comment> filterBy(CommentFilter filter);
+//    List<Comment> filterBy(CommentFilter filter);
 
     List<Comment> findAll(CommentFilter filter);
 

@@ -24,15 +24,15 @@ public class DatabaseCommentService implements CommentService {
     private final DatabaseUserService userService;
     private final DatabaseNewsService newsService;
 
-    @Override
-    public List<Comment> filterBy(CommentFilter filter) {
-        if(filter.getNewsId() == null){
-            throw new RuntimeException("User id should be declared in request params!");
-        }
-        return commentRepository.findAllByNewsId(filter.getNewsId(), PageRequest.of(
-                filter.getPageNumber(), filter.getPageSize()
-        )).getContent();
-    }
+//    @Override
+//    public List<Comment> filterBy(CommentFilter filter) {
+//        if(filter.getNewsId() == null){
+//            throw new RuntimeException("User id should be declared in request params!");
+//        }
+//        return commentRepository.findAllByNewsId(filter.getNewsId(), PageRequest.of(
+//                filter.getPageNumber(), filter.getPageSize()
+//        )).getContent();
+//    }
 
     @Override
     public List<Comment> findAll(CommentFilter filter) {

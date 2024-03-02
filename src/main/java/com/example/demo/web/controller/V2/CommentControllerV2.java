@@ -22,7 +22,7 @@ public class CommentControllerV2 {
 
     @GetMapping
     public ResponseEntity<CommentListResponse> findAll(CommentFilter filter){
-        return ResponseEntity.ok(commentMapper.commentListToCommentListResponse(databaseCommentService.filterBy(filter)));
+        return ResponseEntity.ok(commentMapper.commentListToCommentListResponse(databaseCommentService.findAll(filter)));
     }
 
     @GetMapping("/{id}")
