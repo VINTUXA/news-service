@@ -28,9 +28,15 @@ public class NewsControllerV2 {
                 newsMapper.oneNewsToResponse(databaseNewsService.findById(id)));
     }
 
+//    @PostMapping
+//    public ResponseEntity<NewsResponse> save(@Valid @RequestBody UpsetNewsRequest upsetNewsRequest){
+//        News newNews = databaseNewsService.save(newsMapper.requestToNews(upsetNewsRequest));
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(newsMapper.newsToResponse(newNews));
+//    }
     @PostMapping
     public ResponseEntity<NewsResponse> save(@Valid @RequestBody UpsetNewsRequest upsetNewsRequest){
-        News newNews = databaseNewsService.save(newsMapper.requestToNews(upsetNewsRequest));
+        News newNews = databaseNewsService.save(upsetNewsRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newsMapper.newsToResponse(newNews));
     }

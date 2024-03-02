@@ -57,21 +57,21 @@ public abstract class NewsMapperDelegate implements NewsMapperV2{
             return response;
     }
 
-    @Override
-    public News requestToNews(UpsetNewsRequest request){
-        News news = new News();
-        news.setCreator(userService.findById(request.getCreatorId()));
-        news.setTitle(request.getTitle());
-        news.setNewsText(request.getNewsText());
-        news.setCategory(categoryService.findById(request.getCategoryId()));
-        return news;
-    }
-
-    @Override
-    public News requestToNews(Long newsId, UpsetNewsRequest request){
-        News news = requestToNews(request);
-        news.setId(newsId);
-        return news;
-    }
+//    @Override
+//    public News requestToNews(UpsetNewsRequest request){
+//        News news = new News();
+//        news.setCreator(userService.findById(request.getCreatorId()));
+//        news.setTitle(request.getTitle());
+//        news.setNewsText(request.getNewsText());
+//        news.setCategory(categoryService.findById(request.getCategoryId()));
+//        return news;
+//    }
+//
+//    @Override
+//    public News requestToNews(Long newsId, UpsetNewsRequest request){
+//        News news = requestToNews(request);
+//        news.setId(newsId);
+//        return news;
+//    }
 
 }

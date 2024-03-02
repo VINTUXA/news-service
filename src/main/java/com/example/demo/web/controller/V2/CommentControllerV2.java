@@ -31,9 +31,15 @@ public class CommentControllerV2 {
                 commentMapper.commentToResponse(databaseCommentService.findById(id)));
     }
 
+//    @PostMapping
+//    public ResponseEntity<CommentResponse> save(@Valid @RequestBody UpsetCommentRequest upsetOrderRequest){
+//        Comment newComment = databaseCommentService.save(commentMapper.requestToComment(upsetOrderRequest));
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(commentMapper.commentToResponse(newComment));
+//    }
     @PostMapping
-    public ResponseEntity<CommentResponse> save(@Valid @RequestBody UpsetCommentRequest upsetOrderRequest){
-        Comment newComment = databaseCommentService.save(commentMapper.requestToComment(upsetOrderRequest));
+    public ResponseEntity<CommentResponse> save(@Valid @RequestBody UpsetCommentRequest upsetCommentRequest){
+        Comment newComment = databaseCommentService.save(upsetCommentRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(commentMapper.commentToResponse(newComment));
     }

@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Comment;
 import com.example.demo.web.model.CommentFilter;
+import com.example.demo.web.model.UpsetCommentRequest;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface CommentService {
 
     Comment findById(Long id);
 
-    Comment save(Comment comment);
+    Comment save(UpsetCommentRequest upsetCommentRequest);
 
     Comment update(Comment comment);
 

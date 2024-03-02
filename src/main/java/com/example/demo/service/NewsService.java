@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Comment;
 import com.example.demo.model.News;
 import com.example.demo.web.model.NewsFilter;
+import com.example.demo.web.model.UpsetNewsRequest;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface NewsService {
 
     News findById(Long id);
 
-    News save(News news);
+    News save(UpsetNewsRequest upsetNewsRequest);
 
     News update(News news);
 
