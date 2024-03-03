@@ -48,18 +48,14 @@ public class DatabaseCommentService implements CommentService {
                 .orElseThrow(() -> new EntityNotFoundException(MessageFormat.format("Comment with id {0} not found", id)));
     }
 
-//    @Override
-//    public Comment save(Comment comment) {
-//        return commentRepository.save(comment);
-//    }
     @Override
     public Comment save(UpsetCommentRequest upsetCommentRequest) {
         User user = userService.findById(upsetCommentRequest.getUserId());
         News news = newsService.findById(upsetCommentRequest.getNewsId());
         if (user != null && news != null){
-            Comment comment = commentMapper.requestToComment(upsetCommentRequest);
-            comment.setUser(user);
-            comment.setNews(news);
+            Comment comment = commentMapper.requestToComment(upsetCommentRequest, user, news);
+//            comment.setUser(user);
+//            comment.setNews(news);
              return commentRepository.save(comment);
         } else {
             throw new EntityNotFoundException(MessageFormat.format("User {0} or news {0} doesn't exist", upsetCommentRequest.getUserId(),upsetCommentRequest.getNewsId()));

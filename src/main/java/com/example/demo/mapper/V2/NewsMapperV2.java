@@ -1,6 +1,8 @@
 package com.example.demo.mapper.V2;
 
+import com.example.demo.model.Category;
 import com.example.demo.model.News;
+import com.example.demo.model.User;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.UserService;
 import com.example.demo.web.model.NewsListResponse;
@@ -19,9 +21,12 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {CommentMapperV2.class, UserMapperV2.class, CategoryMapperV2.class})
 public interface NewsMapperV2 {
 
-    public News requestToNews(UpsetNewsRequest request);
+    @Mapping(target = "creator", source = "user")
+    @Mapping(target = "category", source = "category")
+    @Mapping(target = "id", ignore = true)
+    News requestToNews(UpsetNewsRequest request, User user, Category category);
 
-//    @Mapping(source = "creatorId", target = "id")
+
     public News requestToNews(Long newsId, UpsetNewsRequest request);
 
     @Mapping(source = "creator.id", target = "authorId")

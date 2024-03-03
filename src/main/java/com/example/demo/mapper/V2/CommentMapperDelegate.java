@@ -16,19 +16,19 @@ public abstract class CommentMapperDelegate implements CommentMapperV2{
     @Autowired
     private NewsService databaseNewsService;
 
-    @Override
-    public Comment requestToComment(UpsetCommentRequest request){
-        Comment comment = new Comment();
-        comment.setCommentText(request.getCommentText());
-        comment.setUser(databaseUserService.findById(request.getUserId()));
-        comment.setNews(databaseNewsService.findById(request.getNewsId()));
-        return comment;
-    }
+//    @Override
+//    public Comment requestToComment(UpsetCommentRequest request){
+//        Comment comment = new Comment();
+//        comment.setCommentText(request.getCommentText());
+//        comment.setUser(databaseUserService.findById(request.getUserId()));
+//        comment.setNews(databaseNewsService.findById(request.getNewsId()));
+//        return comment;
+//    }
 
-    @Override
-    public Comment requestToComment(Long commentId, UpsetCommentRequest request){
-        Comment comment = requestToComment(request);
-        comment.setId(commentId);
-        return comment;
-    }
+//    @Override
+//    public Comment requestToComment(Long commentId, UpsetCommentRequest request){
+//        Comment comment = requestToComment(request);
+//        comment.setId(commentId);
+//        return comment;
+//    }
 }

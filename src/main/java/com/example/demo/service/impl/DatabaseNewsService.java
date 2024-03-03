@@ -63,20 +63,13 @@ public class DatabaseNewsService implements NewsService {
                 .orElseThrow(() -> new EntityNotFoundException(MessageFormat.format("News with id {0} not found", id)));
         return newsMapper.oneNewsToResponse(news);
     }
-//
 
-//    @Override
-//    public News save(News news) {
-//        return newsRepository.save(news);
-//    }
     @Override
     public News save(UpsetNewsRequest upsetNewsRequest) {
         User user = userService.findById(upsetNewsRequest.getCreatorId());
         Category category = categoryService.findById(upsetNewsRequest.getCategoryId());
         if (user != null && category != null){
-            News news = newsMapper.requestToNews(upsetNewsRequest);
-            news.setCreator(user);
-            news.setCategory(category);
+            News news = newsMapper.requestToNews(upsetNewsRequest, user, category);
             return newsRepository.save(news);
         } else {
             throw new EntityNotFoundException(MessageFormat.format("User {0} or category {0} doesn't exist", upsetNewsRequest.getCreatorId(), upsetNewsRequest.getCategoryId()));
