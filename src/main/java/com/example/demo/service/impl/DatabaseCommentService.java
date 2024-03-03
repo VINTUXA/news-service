@@ -54,13 +54,10 @@ public class DatabaseCommentService implements CommentService {
         News news = newsService.findById(upsetCommentRequest.getNewsId());
         if (user != null && news != null){
             Comment comment = commentMapper.requestToComment(upsetCommentRequest, user, news);
-//            comment.setUser(user);
-//            comment.setNews(news);
              return commentRepository.save(comment);
         } else {
             throw new EntityNotFoundException(MessageFormat.format("User {0} or news {0} doesn't exist", upsetCommentRequest.getUserId(),upsetCommentRequest.getNewsId()));
         }
-//        return commentRepository.save(commentMapper.requestToComment());
     }
 
     @Override
